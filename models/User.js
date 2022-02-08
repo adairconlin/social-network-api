@@ -12,23 +12,17 @@ const UserSchema = new Schema(
             required: true,
             unique: true,
             trim: true
-        }
-    },
-    {
+        },
         email: {
             type: String,
             required: true,
             unique: true,
             validate: [validateEmail, "Please use a valid email address"]
-        }
-    },
-    {
+        },
         thoughts: [{
             type: Schema.Types.ObjectId,
-            ref: "Comment"
-        }]
-    },
-    {
+            ref: "Thought"
+        }],
         friends: [{
             type: Schema.Types.ObjectId,
             ref: "User"
