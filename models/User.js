@@ -1,7 +1,8 @@
 const { Schema, model } = require("mongoose");
 
 let validateEmail = function(email) {
-    let emailRegex = /^\S+@\S+\.\S+$/;
+    //https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
+    let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     return emailRegex.test(email);
 };
 
@@ -31,7 +32,8 @@ const UserSchema = new Schema(
     {
         toJSON: {
             virtuals: true
-        }
+        },
+        id: false
     }
 );
 
