@@ -32,7 +32,10 @@ const thoughtController = {
                 { _id: body.userId },
                 { $push: { thoughts: dbThoughtData._id } },
                 { new: true, runValidators: true }
-            )
+            ).catch((err) => {
+                console.log(err)
+            })
+
             return res.json(dbThoughtData);
         })
         .catch(err => res.status(400).json(err));
@@ -63,6 +66,7 @@ const thoughtController = {
     },
 
     createReaction({ params, body }, res) {
+        console.log(body);
         Thought.findOneAndUpdate(
             { _id: params.thoughtId },
             { $push: { reactions: body } },
