@@ -18,7 +18,7 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validate: [validateEmail, "Please use a valid email address"]
+            //validate: [validateEmail, "Please use a valid email address"]
         },
         thoughts: [{
             type: Schema.Types.ObjectId,
@@ -36,6 +36,12 @@ const UserSchema = new Schema(
         id: false
     }
 );
+
+UserSchema.path("email").validate(function(email) {
+    //https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
+    let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    return emailRegex.test(email);
+}, "Please use a valid email address");
 
 UserSchema.virtual("friendCount").get(function() {
     return this.friends.length;
